@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
     private float _yVelocity;
 
 
-    private float clampCameraMin = -5f;
-    private float clampCameraMax = 5f;
+    private float clampCameraMin = -15f;
+    private float clampCameraMax = 15f;
 
     [SerializeField] Camera _mainCamera;
 
@@ -55,7 +55,6 @@ public class Player : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input. GetAxis("Vertical");
-
         
         Vector3 direction = new Vector3(horizontalInput, 0f, verticalInput);
         Vector3 velocity = direction * _speed;
@@ -75,7 +74,6 @@ public class Player : MonoBehaviour
 
         _characterController.Move(velocity * Time.deltaTime);
     }
-
     private void CameraMovement()
     {
         mouseX = Mathf.Clamp(Input.GetAxis("Mouse X"), clampCameraMin, clampCameraMax);
@@ -88,16 +86,20 @@ public class Player : MonoBehaviour
             Debug.LogError("Main camera is null");
         }
         
-        //look left and right
+        LookLeftAndRight();
+        LookUpAndDown();
+    }
+
+    private void LookLeftAndRight()
+    {
         Vector3 currentRotation = transform.localEulerAngles;
         currentRotation.y += mouseX * cameraSensitivity;
         transform.localRotation = Quaternion.AngleAxis(currentRotation.y, Vector3.up);
-
-        //look up and down
+    }
+    private void LookUpAndDown()
+    {
         Vector3 currentCameraRotation = _mainCamera.gameObject.transform.localEulerAngles;
         currentCameraRotation.x -= mouseY * cameraSensitivity;
         _mainCamera.gameObject.transform.localRotation = Quaternion.AngleAxis(currentCameraRotation.x,Vector3.right);
-
-
     }
 }
