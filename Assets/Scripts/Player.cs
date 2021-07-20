@@ -5,10 +5,22 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private CharacterController _characterController;
+    [Header ("Player Settings")]
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _jumpHeight = 15f;
-    private float _gravity = 1.2f;
+    [SerializeField] private float _gravity = 1.2f;
     private float _yVelocity;
+
+
+    private float clampCameraMin = -5f;
+    private float clampCameraMax = 5f;
+
+    [SerializeField] Camera _mainCamera;
+
+    float mouseX, mouseY;
+    
+    [Header ("Camera Settings")]
+    [SerializeField] float cameraSensitivity = 3f;
 
     void Start()
     {
@@ -17,9 +29,29 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("Character Controller is Null!");
         }
+        LockAndHideCursor();        
+    }
+    void Update()
+    {
+        CharacterMovement();
+        CameraMovement();
+        PressESC();
     }
 
-    void Update()
+    private void LockAndHideCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void PressESC()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }       
+    }
+
+    private void CharacterMovement()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input. GetAxis("Vertical");
@@ -34,12 +66,38 @@ public class Player : MonoBehaviour
             {
                 _yVelocity = _jumpHeight;
             }
-
         }
         
         _yVelocity -= _gravity; 
         velocity.y = _yVelocity;
 
+        velocity = transform.TransformDirection(velocity);
+
         _characterController.Move(velocity * Time.deltaTime);
+    }
+
+    private void CameraMovement()
+    {
+        mouseX = Mathf.Clamp(Input.GetAxis("Mouse X"), clampCameraMin, clampCameraMax);
+        mouseY = Mathf.Clamp(Input.GetAxis("Mouse Y"), clampCameraMin, clampCameraMax);
+
+        _mainCamera = Camera.main;
+
+        if (_mainCamera == null)
+        {
+            Debug.LogError("Main camera is null");
+        }
+        
+        //look left and right
+        Vector3 currentRotation = transform.localEulerAngles;
+        currentRotation.y += mouseX * cameraSensitivity;
+        transform.localRotation = Quaternion.AngleAxis(currentRotation.y, Vector3.up);
+
+        //look up and down
+        Vector3 currentCameraRotation = _mainCamera.gameObject.transform.localEulerAngles;
+        currentCameraRotation.x -= mouseY * cameraSensitivity;
+        _mainCamera.gameObject.transform.localRotation = Quaternion.AngleAxis(currentCameraRotation.x,Vector3.right);
+
+
     }
 }
