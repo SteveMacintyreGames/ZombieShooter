@@ -11,10 +11,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float _gravity = 1.2f;
     private float _yVelocity;
 
-
-    private float clampCameraMin = -15f;
-    private float clampCameraMax = 15f;
-
     [SerializeField] Camera _mainCamera;
 
     float mouseX, mouseY;
@@ -76,8 +72,8 @@ public class Player : MonoBehaviour
     }
     private void CameraMovement()
     {
-        mouseX = Mathf.Clamp(Input.GetAxis("Mouse X"), clampCameraMin, clampCameraMax);
-        mouseY = Mathf.Clamp(Input.GetAxis("Mouse Y"), clampCameraMin, clampCameraMax);
+        mouseX = Input.GetAxis("Mouse X");
+        mouseY = Input.GetAxis("Mouse Y");
 
         _mainCamera = Camera.main;
 
@@ -96,10 +92,15 @@ public class Player : MonoBehaviour
         currentRotation.y += mouseX * cameraSensitivity;
         transform.localRotation = Quaternion.AngleAxis(currentRotation.y, Vector3.up);
     }
+
+    private float yClampMin = 0;
+    private float yClampMax = 26f;
     private void LookUpAndDown()
     {
         Vector3 currentCameraRotation = _mainCamera.gameObject.transform.localEulerAngles;
         currentCameraRotation.x -= mouseY * cameraSensitivity;
+        currentCameraRotation.x = Mathf.Clamp(currentCameraRotation.x, yClampMin,yClampMax);          
         _mainCamera.gameObject.transform.localRotation = Quaternion.AngleAxis(currentCameraRotation.x,Vector3.right);
+
     }
 }
