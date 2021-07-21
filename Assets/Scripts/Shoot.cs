@@ -11,10 +11,10 @@ public class Shoot : MonoBehaviour
     }
     void Update()
     {
-       Shoot();        
+       FireGun();        
     }
 
-    private void Shoot()
+    private void FireGun()
     {
         Vector3 centerOfScreen = new Vector3(0.5f,0.5f,0f);
         Ray rayOrigin = camera.ViewportPointToRay(centerOfScreen);
