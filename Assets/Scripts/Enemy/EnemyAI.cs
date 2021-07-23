@@ -52,12 +52,12 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {   
-        Switch(_currentState)
+        switch(_currentState)
         {
-            case(EnemyState.Chase)
+            case(EnemyState.Chase):
             CalculateMovement();
             break;
-            case(EnemyState.Attack)
+            case(EnemyState.Attack):
             Attack();
             break;
         }        
