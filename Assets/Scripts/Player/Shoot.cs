@@ -23,7 +23,16 @@ public class Shoot : MonoBehaviour
         {
             if(Physics.Raycast(rayOrigin, out hit))
             {
-                Debug.Log("You just shot" + hit.transform.name);
+                //Debug.Log("You just shot" + hit.transform.name);
+                if(hit.transform.tag == "Enemy")
+                {
+                    Health health = hit.transform.GetComponent<Health>();
+                    if (health != null)
+                    {
+                        health.Damage(50);
+                    }
+                }
+                
             }
             else
             {
