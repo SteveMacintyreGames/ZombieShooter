@@ -17,7 +17,7 @@ public class EnemyAI : MonoBehaviour
         Attack
     }
 
-    [SerializeField] private EnemyState _currentState = EnemyState.Chase;
+    [SerializeField] public EnemyState _currentState = EnemyState.Chase;
     private Health _playerHealth;
 
     private float _attackDelay = 1.5f;
@@ -92,22 +92,15 @@ public class EnemyAI : MonoBehaviour
         _velocity.y -= _gravity;
         _controller.Move(_velocity * Time.deltaTime);
     }
-
-    void OnTriggerEnter(Collider other)
+    public void StartAttack()
     {
-        if (other.tag == "Player")
-        {
-            _currentState = EnemyState.Attack;
-        }
-        
+        _currentState = EnemyState.Attack;
     }
 
-    void OnTriggerExit(Collider other)
+    public void StopAttack()
     {
-        if (other.tag == "Player")
-        {
-            _currentState = EnemyState.Chase;
-        }
+        _currentState = EnemyState.Chase;
     }
+ 
 
 }

@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
     [SerializeField] private int _maxHP;
     [SerializeField] private int _minHP;
     [SerializeField] private int _currentHP;
+    
 
     void Start()
     {

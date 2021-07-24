@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
         
         Vector3 direction = new Vector3(horizontalInput, 0f, verticalInput);
         Vector3 velocity = direction * _speed;
+        velocity = transform.TransformDirection(velocity);
 
         if (_characterController.isGrounded)
         {
@@ -62,11 +63,11 @@ public class Player : MonoBehaviour
                 _yVelocity = _jumpHeight;
             }
         }
-        
+       
         _yVelocity -= _gravity; 
         velocity.y = _yVelocity;
 
-        velocity = transform.TransformDirection(velocity);
+        
 
         _characterController.Move(velocity * Time.deltaTime);
     }
@@ -103,4 +104,6 @@ public class Player : MonoBehaviour
         _mainCamera.gameObject.transform.localRotation = Quaternion.AngleAxis(currentCameraRotation.x,Vector3.right);
 
     }
+
+    
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
     Camera camera;
+    [SerializeField] private GameObject _bloodSplat;
     void Start()
     {
         camera = Camera.main;
@@ -21,14 +22,16 @@ public class Shoot : MonoBehaviour
         RaycastHit hit;
         if(Input.GetMouseButtonDown(0))
         {
-            if(Physics.Raycast(rayOrigin, out hit))
+            if(Physics.Raycast(rayOrigin, out hit, Mathf.Infinity, 1 << 9 | 1 << 0))
             {
-                //Debug.Log("You just shot" + hit.transform.name);
+                Debug.Log("You just shot" + hit.transform.name);
                 if(hit.transform.tag == "Enemy")
                 {
                     Health health = hit.transform.GetComponent<Health>();
                     if (health != null)
                     {
+                        GameObject bloodSplat = Instantiate(_bloodSplat, hit.point, Quaternion.LookRotation(hit.normal));
+                        Destroy (bloodSplat, .75f);
                         health.Damage(50);
                     }
                 }

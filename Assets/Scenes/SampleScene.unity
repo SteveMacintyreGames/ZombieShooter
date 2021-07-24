@@ -128,35 +128,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4036335789842641099, guid: 46be5efd96b4ac29a8c8a644eb0e63d3,
-        type: 3}
-      propertyPath: _speed
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5559486663503116532, guid: 46be5efd96b4ac29a8c8a644eb0e63d3,
         type: 3}
       propertyPath: m_Name
       value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 6804968792613653774, guid: 46be5efd96b4ac29a8c8a644eb0e63d3,
-        type: 3}
-      propertyPath: maxHP
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6804968792613653774, guid: 46be5efd96b4ac29a8c8a644eb0e63d3,
-        type: 3}
-      propertyPath: minHP
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6804968792613653774, guid: 46be5efd96b4ac29a8c8a644eb0e63d3,
-        type: 3}
-      propertyPath: _maxHP
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 6804968792613653774, guid: 46be5efd96b4ac29a8c8a644eb0e63d3,
-        type: 3}
-      propertyPath: _minHP
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8038831710146467665, guid: 46be5efd96b4ac29a8c8a644eb0e63d3,
         type: 3}
@@ -437,8 +412,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cfb638f47b167bbb98ba1c0d6b18d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _jumpHeight: 13
+  _speed: 7
+  _jumpHeight: 15
   _gravity: 1.2
   _mainCamera: {fileID: 963194227}
   cameraSensitivity: 1
@@ -454,6 +429,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6905d58625b4bf3669bfefab7dc981f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bloodSplat: {fileID: 8729043021112652020, guid: 819c6268a8e154147984aa729b6f126b,
+    type: 3}
 --- !u!114 &640687722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,8 +443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e960d6f2c274e70bb9d6d16d4714a4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 0
-  _minHP: 0
+  _maxHP: 100
+  _minHP: 1
   _currentHP: 0
 --- !u!1 &705507993
 GameObject:
