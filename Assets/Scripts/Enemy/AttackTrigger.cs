@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttackTrigger : MonoBehaviour
 {
     EnemyAI _enemyAI;
+    Animator _anim;
 
     void Start()
     {
@@ -13,11 +14,21 @@ public class AttackTrigger : MonoBehaviour
         {
             Debug.LogError("_enemyAI is NULL");
         }
+        _anim = GetComponentInParent<Animator>();
+        if(_anim == null)
+        {
+            Debug.LogError("_anim is NULL");
+        }
+        else
+        {
+            _anim.SetBool("Attacking", false);
+        }
     }
      void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
+            _anim.SetBool("Attacking", true);
             _enemyAI.StartAttack();
         }
         
@@ -27,6 +38,7 @@ public class AttackTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            _anim.SetBool("Attacking", false);
             _enemyAI.StopAttack();
         }
     }

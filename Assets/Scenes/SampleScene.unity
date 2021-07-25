@@ -2629,7 +2629,7 @@ Animator:
   m_GameObject: {fileID: 8296172668615159566}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ca1e8e6c0969047d0a3db60bdfa7b91f, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 309dd9384350ebfc3807b2c0b6117f66, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -4570,6 +4570,7 @@ GameObject:
   - component: {fileID: 659574922}
   - component: {fileID: 659574920}
   - component: {fileID: 659574921}
+  - component: {fileID: 8296172668615159567}
   m_Layer: 9
   m_Name: Zombie_Rigged
   m_TagString: Enemy
@@ -4577,6 +4578,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8296172668615159567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296172668615159566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RigLayers:
+  - rig: {fileID: 0}
+    active: 1
+  m_Effectors: []
 --- !u!4 &8297936946901701956
 Transform:
   m_ObjectHideFlags: 0
